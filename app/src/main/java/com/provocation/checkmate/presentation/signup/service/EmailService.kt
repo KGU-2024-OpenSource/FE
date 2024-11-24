@@ -33,7 +33,7 @@ object EmailService {
                 if (response.isSuccessful) {
                     onSuccess()
             }   else {
-                onFailure(response.message)
+                    onFailure("서버 오류: ${response.code} - ${response.message}")
                 }
             }
         })
