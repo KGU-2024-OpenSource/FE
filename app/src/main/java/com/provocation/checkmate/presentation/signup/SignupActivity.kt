@@ -33,8 +33,8 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var characters: List<LinearLayout>
     private lateinit var dots: List<View>
 
-
-
+    private var selectedGender : String? = null
+    private var selectedProfile : Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
@@ -46,6 +46,8 @@ class SignupActivity : AppCompatActivity() {
         setupVerifyCode()
         setupPassword()
         setupNickname()
+        setupGenderSelection()
+        setupCharacterSelection()
     }
 
     private fun initViews() {
@@ -77,10 +79,12 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupGenderSelection() {
         btnMale.setOnClickListener {
+            selectedGender = "MALE"
             updateGenderSelection(btnMale, btnFemale)
         }
 
         btnFemale.setOnClickListener {
+            selectedGender = "FEMALE"
             updateGenderSelection(btnFemale, btnMale)
         }
     }
@@ -93,7 +97,9 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupCharacterSelection() {
         characters.forEachIndexed { index, character ->
-            character.setOnClickListener { updateCharterSelection(index) }
+            character.setOnClickListener {
+                selectedProfile = index
+                updateCharterSelection(index) }
         }
     }
 
