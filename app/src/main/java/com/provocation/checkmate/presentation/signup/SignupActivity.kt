@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton
 import com.provocation.checkmate.R
 import com.provocation.checkmate.presentation.signup.service.AuthEmailService
 import com.provocation.checkmate.presentation.signup.service.EmailService
+import com.provocation.checkmate.presentation.signup.service.checkNickname
 
 class SignupActivity : AppCompatActivity() {
 
@@ -24,8 +25,14 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var btnVerifyCode: MaterialButton
     private lateinit var verifyInput: EditText
 
+    private lateinit var passwordInput: EditText
+
+    private lateinit var nicknameInput: EditText
+    private lateinit var btnDuplicateCheck: MaterialButton
+
     private lateinit var characters: List<LinearLayout>
     private lateinit var dots: List<View>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +44,8 @@ class SignupActivity : AppCompatActivity() {
         setupCharacterSelection()
         setupEmailVerification()
         setupVerifyCode()
+        setupPassword()
+        setupNickname()
     }
 
     private fun initViews() {
@@ -48,6 +57,11 @@ class SignupActivity : AppCompatActivity() {
 
         btnVerifyCode = findViewById(R.id.btn_verify_code_check)
         verifyInput = findViewById(R.id.et_email_verify)
+
+        passwordInput = findViewById(R.id.et_pw)
+
+        nicknameInput = findViewById(R.id.et_nickname)
+        btnDuplicateCheck = findViewById(R.id.btn_dup_check)
 
         characters = listOf(
             findViewById(R.id.character_1),
@@ -111,6 +125,25 @@ class SignupActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun setupPassword() {
+        val password = passwordInput.text.toString().trim()
+        if (!isPasswordValid(password)) {
+            Toast.makeText(this, "비밀번호는 영어와 숫자를 포함하며, 최소 10글자 이상이어야 합니다", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupNickname() {
+        btnDuplicateCheck.setOnClickListener {
+            val nickname = nicknameInput.text.toString().trim()
+            if (nickname.isNotEmpty()) {
+                duplicateCheckNickname(nickname)
+            } else {
+                Toast.makeText(this, "닉네임을 입력하세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun authenticationVerifyCode(email: String, code: String) {
         AuthEmailService.sendVerificationCode(
             email,
@@ -146,5 +179,32 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private fun duplicateCheckNickname(nickname: String) {
+        checkNickname(
+            nickname,
+            onSuccess = {
+                runOnUiThread{
+                    Toast.makeText(this, "닉네임 확인 완료", Toast.LENGTH_SHORT).show()
+                    btnDuplicateCheck.text = "사용가능"
+                    btnDuplicateCheck.setTextColor(Color.WHITE)
+                    btnDuplicateCheck.isEnabled = false
+                }
+            },
+            onFailure = { errorMessage ->
+                runOnUiThread {
+                    Toast.makeText(this, "이미 사용 중인 닉네임입니다: $errorMessage", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        val hasLetter = password.any { it.isLetter() }
+        val hasDigit = password.any { it.isDigit() }
+        val isLongEnough = password.length >= 10
+
+        return hasLetter && hasDigit && isLongEnough
     }
 }
