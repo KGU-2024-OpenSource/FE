@@ -1,20 +1,26 @@
 package com.provocation.checkmate.presentation.signup
 
-import android.app.PendingIntent.OnFinished
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.provocation.checkmate.R
 import com.provocation.checkmate.presentation.signup.service.AuthEmailService
 import com.provocation.checkmate.presentation.signup.service.EmailService
+import com.provocation.checkmate.presentation.signup.service.SignupService
 import com.provocation.checkmate.presentation.signup.service.checkNickname
 
 class SignupActivity : AppCompatActivity() {
+
+    private lateinit var btnBack: MaterialToolbar
 
     private lateinit var btnMale: MaterialButton
     private lateinit var btnFemale: MaterialButton
@@ -32,25 +38,21 @@ class SignupActivity : AppCompatActivity() {
 
     private lateinit var characters: List<LinearLayout>
     private lateinit var dots: List<View>
+    private lateinit var btnSignup: MaterialButton
 
-    private var selectedGender : String? = null
-    private var selectedProfile : Int? = null
+    private var selectedGender: String? = null
+    private var selectedProfile: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
         initViews()
-        setupGenderSelection()
-        setupCharacterSelection()
-        setupEmailVerification()
-        setupVerifyCode()
-        setupPassword()
-        setupNickname()
-        setupGenderSelection()
-        setupCharacterSelection()
+        setupListeners()
     }
 
     private fun initViews() {
+        btnBack = findViewById(R.id.toolbar)
         btnMale = findViewById(R.id.btn_male)
         btnFemale = findViewById(R.id.btn_female)
 
@@ -65,6 +67,8 @@ class SignupActivity : AppCompatActivity() {
         nicknameInput = findViewById(R.id.et_nickname)
         btnDuplicateCheck = findViewById(R.id.btn_dup_check)
 
+        btnSignup = findViewById(R.id.btn_register)
+
         characters = listOf(
             findViewById(R.id.character_1),
             findViewById(R.id.character_2),
@@ -76,141 +80,150 @@ class SignupActivity : AppCompatActivity() {
             findViewById(R.id.dot_3)
         )
     }
+    private fun setupListeners() {
+        // EditText 유효성 검사
+        val textWatcher = createTextWatcher()
 
-    private fun setupGenderSelection() {
-        btnMale.setOnClickListener {
-            selectedGender = "MALE"
-            updateGenderSelection(btnMale, btnFemale)
-        }
+        setupBtnBack()
 
-        btnFemale.setOnClickListener {
-            selectedGender = "FEMALE"
-            updateGenderSelection(btnFemale, btnMale)
-        }
-    }
+        emailInput.addTextChangedListener(textWatcher)
+        passwordInput.addTextChangedListener(textWatcher)
+        nicknameInput.addTextChangedListener(textWatcher)
 
-    private fun updateGenderSelection(selectionButton: MaterialButton,
-                                      unselectedButton: MaterialButton) {
-        selectionButton.isSelected = true
-        unselectedButton.isSelected = false
-    }
+        // 성별 선택
+        setupGenderSelection(btnMale, "MALE", btnFemale)
+        setupGenderSelection(btnFemale, "FEMALE", btnMale)
 
-    private fun setupCharacterSelection() {
+        // 프로필 선택
         characters.forEachIndexed { index, character ->
             character.setOnClickListener {
                 selectedProfile = index
-                updateCharterSelection(index) }
+                updateCharterSelection(index)
+                updateSignupButtonState()
+            }
         }
-    }
 
-    private fun updateCharterSelection(selectedIndex: Int) {
-        dots.forEachIndexed { index, dot ->
-            dot.isSelected = index == selectedIndex
-        }
-    }
-
-    private fun setupEmailVerification() {
+        // 이메일 인증
         btnSendVerifyCode.setOnClickListener {
             val email = emailInput.text.toString().trim()
             if (email.isNotEmpty() && email.contains("@kyonggi.ac.kr")) {
                 sendEmailVerification(email)
             } else {
-                Toast.makeText(this, "경기대학교 이메일만을 입력해주세요", Toast.LENGTH_SHORT).show()
+                showToast("경기대학교 이메일만을 입력해주세요")
             }
         }
-    }
 
-    private fun setupVerifyCode() {
+        // 인증 코드 확인
         btnVerifyCode.setOnClickListener {
             val code = verifyInput.text.toString().trim()
             val email = emailInput.text.toString().trim()
-            if(code.isNotEmpty())
-                authenticationVerifyCode(email, code)
-            else {
-                Toast.makeText(this, "이메일로 받은 인증번호를 입력하세요", Toast.LENGTH_SHORT).show()
-            }
+            if (code.isNotEmpty()) authenticationVerifyCode(email, code)
+            updateSignupButtonState()
         }
-    }
 
-    private fun setupPassword() {
-        val password = passwordInput.text.toString().trim()
-        if (!isPasswordValid(password)) {
-            Toast.makeText(this, "비밀번호는 영어와 숫자를 포함하며, 최소 10글자 이상이어야 합니다", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun setupNickname() {
+        // 닉네임 중복 확인
         btnDuplicateCheck.setOnClickListener {
             val nickname = nicknameInput.text.toString().trim()
-            if (nickname.isNotEmpty()) {
-                duplicateCheckNickname(nickname)
-            } else {
-                Toast.makeText(this, "닉네임을 입력하세요", Toast.LENGTH_SHORT).show()
-            }
+            if (nickname.isNotEmpty()) duplicateCheckNickname(nickname)
+            updateSignupButtonState()
         }
+
+        // 회원가입
+        btnSignup.setOnClickListener { performSignup() }
+    }
+    private fun setupBtnBack() {
+        btnBack.setNavigationOnClickListener {
+            finish()
+        }
+    }
+
+    private fun setupGenderSelection(button: MaterialButton, gender: String, otherButton: MaterialButton) {
+        button.setOnClickListener {
+            selectedGender = gender
+            updateGenderSelection(button, otherButton)
+            updateSignupButtonState()
+        }
+    }
+
+    private fun updateGenderSelection(selectedButton: MaterialButton, unselectedButton: MaterialButton) {
+        selectedButton.isSelected = true
+        unselectedButton.isSelected = false
+    }
+
+    private fun updateCharterSelection(selectedIndex: Int) {
+        dots.forEachIndexed { index, dot -> dot.isSelected = index == selectedIndex }
+    }
+
+    private fun createTextWatcher() = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            updateSignupButtonState()
+        }
+        override fun afterTextChanged(s: Editable?) {}
+    }
+
+    private fun updateSignupButtonState() {
+        val isEmailValid = emailInput.text.toString().isNotEmpty() && emailInput.text.toString().contains("@kyonggi.ac.kr")
+        val isPasswordValid = isPasswordValid(passwordInput.text.toString())
+        val isNicknameChecked = btnDuplicateCheck.text == "사용가능"
+        val isVerifyCodeChecked = btnVerifyCode.text == "인증 완료"
+        val isGenderSelected = selectedGender != null
+        val isProfileSelected = selectedProfile != null
+
+        val isAllValid = isEmailValid && isPasswordValid && isNicknameChecked && isVerifyCodeChecked && isGenderSelected && isProfileSelected
+
+        btnSignup.isEnabled = isAllValid
+        btnSignup.setBackgroundColor(if (isAllValid) Color.parseColor("#6200EE") else Color.parseColor("#D3D3D3"))
+    }
+
+    private fun sendEmailVerification(email: String) {
+        EmailService.sendVerificationEmail(email,
+            onSuccess = { runOnUiThread { showToast("인증코드 전송 완료") } },
+            onFailure = { errorMessage -> runOnUiThread { showToast("인증코드 전송 실패: $errorMessage") } })
     }
 
     private fun authenticationVerifyCode(email: String, code: String) {
-        AuthEmailService.sendVerificationCode(
-            email,
-            code,
-            onSuccess = {
-                runOnUiThread{
-                    btnVerifyCode.text = "인증 완료"
-                    btnVerifyCode.setTextColor(Color.WHITE)
-                    btnSendVerifyCode.isEnabled = false
-                }
-            },
-            onFailure = { errorMessage ->
-                runOnUiThread {
-                    Toast.makeText(this, "인증 코드가 일치하지 않습니다: $errorMessage", Toast.LENGTH_SHORT).show()
-                }
-            }
-        )
-    }
-    private fun sendEmailVerification(email: String) {
-        EmailService.sendVerificationEmail(
-            email,
-            onSuccess = {
-                runOnUiThread{
-                    Toast.makeText(this, "인증코드 전송 완료", Toast.LENGTH_SHORT).show()
-                    btnSendVerifyCode.text = "전송완료"
-                    btnSendVerifyCode.setTextColor(Color.WHITE)
-                    btnSendVerifyCode.isEnabled = false
-                }
-            },
-            onFailure = { errorMessage ->
-                runOnUiThread {
-                    Toast.makeText(this, "인증코드 전송 실패: $errorMessage", Toast.LENGTH_SHORT).show()
-                }
-            }
-        )
+        AuthEmailService.sendVerificationCode(email, code,
+            onSuccess = { runOnUiThread { btnVerifyCode.text = "인증 완료" } },
+            onFailure = { errorMessage -> runOnUiThread { showToast("인증 코드가 일치하지 않습니다: $errorMessage") } })
     }
 
     private fun duplicateCheckNickname(nickname: String) {
-        checkNickname(
-            nickname,
-            onSuccess = {
-                runOnUiThread{
-                    Toast.makeText(this, "닉네임 확인 완료", Toast.LENGTH_SHORT).show()
-                    btnDuplicateCheck.text = "사용가능"
-                    btnDuplicateCheck.setTextColor(Color.WHITE)
-                    btnDuplicateCheck.isEnabled = false
-                }
-            },
-            onFailure = { errorMessage ->
-                runOnUiThread {
-                    Toast.makeText(this, "이미 사용 중인 닉네임입니다: $errorMessage", Toast.LENGTH_SHORT).show()
-                }
-            }
-        )
+        checkNickname(nickname,
+            onSuccess = { runOnUiThread { btnDuplicateCheck.text = "사용가능" } },
+            onFailure = { errorMessage -> runOnUiThread { showToast("닉네임 중복: $errorMessage") } })
+    }
+
+    private fun performSignup() {
+        val email = emailInput.text.toString().trim()
+        val password = passwordInput.text.toString().trim()
+        val nickname = nicknameInput.text.toString().trim()
+
+        if (!isPasswordValid(password)) {
+            showToast("비밀번호는 영어와 숫자를 포함하며, 최소 10글자 이상이어야 합니다")
+            return
+        }
+
+        SignupService.signup(email, password, nickname, selectedGender!!, getProfileNumber(),
+            onSuccess = { runOnUiThread { showToast("회원가입 성공"); finish() } },
+            onFailure = { errorMessage -> runOnUiThread { showToast("회원가입 실패: $errorMessage") } })
+    }
+
+    private fun getProfileNumber(): String = when (selectedProfile!!) {
+        0 -> "ONE"
+        1 -> "TWO"
+        2 -> "THREE"
+        else -> throw IllegalStateException("Invalid profile selection")
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun isPasswordValid(password: String): Boolean {
         val hasLetter = password.any { it.isLetter() }
         val hasDigit = password.any { it.isDigit() }
         val isLongEnough = password.length >= 10
-
         return hasLetter && hasDigit && isLongEnough
     }
 }
