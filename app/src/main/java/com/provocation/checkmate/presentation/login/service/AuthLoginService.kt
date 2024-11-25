@@ -41,7 +41,7 @@ object AuthLoginService {
                         PreferenceManager.saveJwtToken (context, email, jwt)
                         onSuccess()
                     } else {
-                        onFailure("JWT 토큰이 존재하지 않습니다.")
+                        onFailure("비밀번호가 틀렸거나, 해당 계정이 존재하지 않습니다.")
                     }
                 } else ("HTTP 오류 : ${response.code}")
             }
