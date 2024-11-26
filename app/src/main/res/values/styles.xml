@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="IAmYouAre_ToggleButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">@drawable/i_am_you_are_toggle_button_background</item>
+        <item name="android:textColor">@drawable/i_am_you_are_toggle_button_text_color</item>
+    </style>
+    <style name="IAmYouAre_TextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name = "toolbarTitleStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name= "android:textSize" >30sp</item>
         <item name= "android:textStyle">bold</item>

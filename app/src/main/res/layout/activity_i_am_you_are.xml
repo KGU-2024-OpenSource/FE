@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Top bar with back button and title -->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <android.widget.Button
+            android:id="@+id/btnBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_arrow_left"
+            android:gravity="center" />
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="나는 너는 작성하기"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/btnUpdate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="나는 이런 사람이야"
+                android:textSize="20sp"/>
+
+            <!-- MBTI Selection -->
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="MBTI" />
+
+            <Spinner
+                android:id="@+id/iam_spinnerMbti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Year and Birth Year Selection -->
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="학번" />
+
+            <Spinner
+                android:id="@+id/iam_spinnerYearOfAdmission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="출생년도" />
+
+            <Spinner
+                android:id="@+id/iam_spinnerYearOfBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Graduation Selection -->
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="흡연" />
+
+            <LinearLayout
+                android:id="@+id/iam_smoke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/iam_smoke_toggle_no"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="노담"
+                    android:textOn="노담" />
+
+                <ToggleButton
+                    android:id="@+id/iam_smoke_toggle_tobacco"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="연초"
+                    android:textOn="연초" />
+
+                <ToggleButton
+                    android:id="@+id/iam_smoke_toggle_electronic"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="전담"
+                    android:textOn="전담" />
+            </LinearLayout>
+
+            <!-- Personality Traits -->
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="코골이" />
+
+            <LinearLayout
+                android:id="@+id/iam_snoring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/iam_snoring_toggle_yes"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="O"
+                    android:textOn="O" />
+
+                <ToggleButton
+                    android:id="@+id/iam_snoring_toggle_no"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="X"
+                    android:textOn="X" />
+
+                <ToggleButton
+                    android:id="@+id/iam_snoring_toggle_little"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="가끔"
+                    android:textOn="가끔" />
+            </LinearLayout>
+
+            <!-- Sleep Preference -->
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="잠귀" />
+
+            <LinearLayout
+                android:id="@+id/iam_sleep_sensor"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/iam_sleep_sensor_toggle_light"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="밝음"
+                    android:textOn="밝음" />
+
+                <ToggleButton
+                    android:id="@+id/iam_sleep_sensor_toggle_dark"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="어두움"
+                    android:textOn="어두움" />
+
+                <ToggleButton
+                    android:id="@+id/iam_sleep_sensor_toggle_dont_know"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="모름"
+                    android:textOn="모름" />
+            </LinearLayout>
+
+            <!-- Major Input -->
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="학과" />
+
+            <EditText
+                android:id="@+id/iam_et_major"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="내 학과를 입력해주세요"
+                android:textColorHint="#55000000"
+                android:textColor="#FF000000"
+                android:backgroundTint="#55000000"
+                />
+
+            <!-- Friendship Level -->
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="희망 친밀도" />
+
+            <LinearLayout
+                android:id="@+id/iam_hope_intimacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/iam_hope_intimacy_toggle_business"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="비즈니스"
+                    android:textOn="비즈니스" />
+
+                <ToggleButton
+                    android:id="@+id/iam_hope_intimacy_toggle_friend"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="친구"
+                    android:textOn="친구" />
+
+                <ToggleButton
+                    android:id="@+id/iam_hope_intimacy_toggle_best_friend"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="짱친"
+                    android:textOn="짱친" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="너는 이런 사람이면 좋겠어"
+                android:textSize="20sp"/>
+
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="흡연" />
+
+            <LinearLayout
+                android:id="@+id/youare_smoke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/youare_smoke_toggle_no"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="노담"
+                    android:textOn="노담" />
+
+                <ToggleButton
+                    android:id="@+id/youare_smoke_toggle_tobacco"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="연초"
+                    android:textOn="연초" />
+
+                <ToggleButton
+                    android:id="@+id/youare_smoke_toggle_electronic"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="전담"
+                    android:textOn="전담" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="코골이" />
+
+
+            <LinearLayout
+                android:id="@+id/youare_snoring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/youare_snoring_toggle_yes"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="O"
+                    android:textOn="O" />
+
+                <ToggleButton
+                    android:id="@+id/youare_snoring_toggle_no"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="X"
+                    android:textOn="X" />
+
+                <ToggleButton
+                    android:id="@+id/youare_snoring_toggle_little"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="가끔"
+                    android:textOn="가끔" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="잠귀" />
+            <LinearLayout
+                android:id="@+id/youare_sleep_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/youare_sleep_sensor_toggle_light"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="밝음"
+                    android:textOn="밝음" />
+
+                <ToggleButton
+                    android:id="@+id/youare_sleep_sensor_toggle_dark"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="어두움"
+                    android:textOn="어둠" />
+
+                <ToggleButton
+                    android:id="@+id/youare_sleep_sensor_toggle_dont_know"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="모름"
+                    android:textOn="모름" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/IAmYouAre_TextViewStyle"
+                android:text="학과" />
+            <LinearLayout
+                android:id="@+id/youare_major"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/youare_major_same"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="같아야 함"
+                    android:textOn="같아야 함" />
+
+                <ToggleButton
+                    android:id="@+id/youare_major_differ"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="달라야 함"
+                    android:textOn="달라야 함" />
+
+                <ToggleButton
+                    android:id="@+id/youare_major_no_matter"
+                    style="@style/IAmYouAre_ToggleButtonStyle"
+                    android:textOff="상관 없음"
+                    android:textOn="상관 없음" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Bottom button for updates -->
+    <android.widget.Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="업데이트 하기"
+        android:background="@drawable/black_rounded_button"
+        android:textColor="@color/white"
+        android:layout_margin="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
