@@ -173,7 +173,7 @@ class SignupActivity : AppCompatActivity() {
         val isAllValid = isEmailValid && isPasswordValid && isNicknameChecked && isVerifyCodeChecked && isGenderSelected && isProfileSelected
 
         btnSignup.isEnabled = isAllValid
-        btnSignup.setBackgroundColor(if (isAllValid) Color.parseColor("#6200EE") else Color.parseColor("#D3D3D3"))
+        btnSignup.setBackgroundColor(if (isAllValid) Color.parseColor("#000000") else Color.parseColor("#D3D3D3"))
     }
 
     private fun sendEmailVerification(email: String) {
