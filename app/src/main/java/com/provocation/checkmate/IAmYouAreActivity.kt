@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import android.widget.ToggleButton
+import com.provocation.checkmate.presentation.home.HomeActivity
 
 class IAmYouAreActivity : AppCompatActivity() {
 
@@ -154,7 +155,7 @@ class IAmYouAreActivity : AppCompatActivity() {
         ).show()
     }
     private fun goBack() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
 
         // 새로운 액티비티를 스택에 쌓지 않고 이전 화면으로 돌아가게 하려면, FLAG_ACTIVITY_CLEAR_TOP을 설정
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

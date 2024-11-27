@@ -24,11 +24,15 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".presentation.signup.SignupActivity"
+        <activity android:name=".presentation.signup.SignupActivity"
             android:exported="true"
             android:theme="@style/Theme.Checkmate"/>
-
+        <activity android:name=".presentation.home.HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Checkmate"/>
+        <activity android:name=".IAmYouAreActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Checkmate"/>
     </application>
 
 </manifest>
