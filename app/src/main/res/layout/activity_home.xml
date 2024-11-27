@@ -66,6 +66,15 @@
         app:strokeColor="@color/gray"
         app:strokeWidth="3dp" />
 
+    <Button
+        android:id="@+id/btnHomeToMDI"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/myNickname"
         android:layout_width="wrap_content"
