@@ -8,6 +8,7 @@
         <item name="android:background">@drawable/i_am_you_are_toggle_button_background</item>
         <item name="android:textColor">@drawable/i_am_you_are_toggle_button_text_color</item>
     </style>
+
     <style name="IAmYouAre_TextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -17,5 +18,10 @@
     <style name = "toolbarTitleStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name= "android:textSize" >30sp</item>
         <item name= "android:textStyle">bold</item>
+    </style>
+
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

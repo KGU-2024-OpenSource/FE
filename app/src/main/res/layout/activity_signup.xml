@@ -33,62 +33,65 @@
 
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="320dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:hint="이메일을 입력해주세요"
+        android:textSize="7pt"
         android:inputType="textEmailAddress"
         android:paddingStart="16dp"
         android:textColor="@color/text_color"
         android:textColorHint="@color/hint_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/et_email_verify"
-        android:layout_width="320dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:hint="이메일로 받은 인증번호를 입력하세요"
+        android:hint="인증번호를 입력하세요"
+        android:textSize="7pt"
         android:inputType="text"
         android:paddingStart="16dp"
         android:textColor="@color/text_color"
         android:textColorHint="@color/hint_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <EditText
         android:id="@+id/et_pw"
-        android:layout_width="430dp"
+        android:layout_width="330dp"
         android:layout_height="60dp"
         android:layout_marginTop="52dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:hint="비밀번호를 입력하세요"
+        android:textSize="7pt"
         android:inputType="textPassword"
         android:paddingStart="16dp"
         android:textColor="@color/text_color"
         android:textColorHint="@color/hint_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email_verify"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.01" />
 
     <EditText
         android:id="@+id/et_nickname"
-        android:layout_width="320dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginBottom="464dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:hint="사용할 닉네임을 입력하세요"
@@ -96,12 +99,11 @@
         android:paddingStart="16dp"
         android:textColor="@color/text_color"
         android:textColorHint="@color/hint_color"
+        android:textSize="7pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pw"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -122,7 +124,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/et_email_verify"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -134,7 +136,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/et_pw"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -145,7 +147,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/et_nickname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_pw"
         app:layout_constraintVertical_bias="1.0" />
@@ -166,7 +168,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_male"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/select_button_background"
@@ -184,7 +186,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_female"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="70dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/select_button_background"
@@ -225,8 +227,8 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:srcCompat="@drawable/school_looks_kgu" />
 
         <View
@@ -242,7 +244,7 @@
         android:id="@+id/character_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
+        android:layout_marginStart="240dp"
         android:layout_marginTop="70dp"
         android:clickable="true"
         android:focusable="true"
@@ -253,8 +255,8 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:srcCompat="@drawable/computer_kgu" />
 
         <View
@@ -270,7 +272,7 @@
         android:id="@+id/character_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="70dp"
         android:clickable="true"
         android:focusable="true"
@@ -281,8 +283,8 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:srcCompat="@drawable/flower_kgu" />
 
         <View
@@ -296,9 +298,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_register"
-        android:layout_width="440dp"
+        android:layout_width="330dp"
         android:layout_height="70dp"
-        android:layout_marginTop="900dp"
+        android:layout_marginBottom="28dp"
         android:backgroundTint="@color/gray"
         android:text="회원가입"
         android:textColor="@color/black"
@@ -306,9 +308,8 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_verify_code_send"
@@ -320,10 +321,10 @@
         app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.131" />
+        app:layout_constraintVertical_bias="0.123" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_verify_code_check"
@@ -335,10 +336,10 @@
         app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.248" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_dup_check"
