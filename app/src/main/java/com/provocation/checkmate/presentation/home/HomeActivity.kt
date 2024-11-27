@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.provocation.checkmate.IAmYouAreActivity
+import com.provocation.checkmate.MateDetailInfoActivity
 import com.provocation.checkmate.R
 class HomeActivity : AppCompatActivity() {
 
@@ -16,7 +18,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var btn_IUbar : View
     private lateinit var btn_Homebar : View
 
-
+    // Mate 상세 정보 보기 테스트용 버튼
+    private lateinit var btnMDI : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,10 @@ class HomeActivity : AppCompatActivity() {
             showToast("Chat 전환")
         }
 
+        btnMDI.setOnClickListener{
+            val intent = Intent(this, MateDetailInfoActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initViews() {
@@ -49,6 +56,8 @@ class HomeActivity : AppCompatActivity() {
         Log.d("HomeActivity", "btn_Chatbar: $btn_Chatbar")
         Log.d("HomeActivity", "btn_Homebar: $btn_Homebar")
         Log.d("HomeActivity", "btn_IUbar: $btn_IUbar")
+
+        btnMDI = findViewById(R.id.btnHomeToMDI)
     }
 
     private fun showToast(message: String) {

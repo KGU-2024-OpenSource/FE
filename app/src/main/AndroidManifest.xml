@@ -18,10 +18,10 @@
             android:name=".presentation.login.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Checkmate">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".presentation.signup.SignupActivity"
@@ -29,8 +29,19 @@
             android:theme="@style/Theme.Checkmate"/>
         <activity android:name=".presentation.home.HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.Checkmate"/>
+            android:theme="@style/Theme.Checkmate">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".IAmYouAreActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Checkmate"/>
+        <activity
+            android:name=".MateDetailInfoActivity"
             android:exported="true"
             android:theme="@style/Theme.Checkmate"/>
     </application>
