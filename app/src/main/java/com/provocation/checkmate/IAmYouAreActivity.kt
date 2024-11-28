@@ -2,8 +2,6 @@ package com.provocation.checkmate
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
@@ -11,7 +9,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import android.widget.ToggleButton
-import com.provocation.checkmate.presentation.home.HomeActivity
+import com.provocation.checkmate.presentation.home.HomeFragment
 
 class IAmYouAreActivity : AppCompatActivity() {
 
@@ -118,7 +116,7 @@ class IAmYouAreActivity : AppCompatActivity() {
         // 뒤로가기 버튼 정의
         buttonBack = findViewById(R.id.btnBack)
         buttonBack.setOnClickListener{
-            goBack()
+            onBackPressed();
         }
     }
 
@@ -154,17 +152,6 @@ class IAmYouAreActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
     }
-    private fun goBack() {
-        val intent = Intent(this, HomeActivity::class.java)
 
-        // 새로운 액티비티를 스택에 쌓지 않고 이전 화면으로 돌아가게 하려면, FLAG_ACTIVITY_CLEAR_TOP을 설정
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-
-        // 액티비티 전환
-        startActivity(intent)
-
-        // 현재 액티비티 종료 (선택적)
-        finish()
-    }
 
 }
