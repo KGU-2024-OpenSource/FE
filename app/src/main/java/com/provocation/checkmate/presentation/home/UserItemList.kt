@@ -2,8 +2,10 @@ package com.provocation.checkmate.presentation.home
 
 data class UserItemList(
     //var profile: String? = null,
-    val profileLocal: Int,
     var mateNickName: String? = null,
-    var smoke: String? = null,
+    val profileImageUrl: Int,
+    val studentId: Int,
+    val birthYear: Int,
     var mbti: String? = null,
+    var desire: String? = null
 )

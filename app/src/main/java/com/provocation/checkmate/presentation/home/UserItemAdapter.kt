@@ -12,11 +12,12 @@ class UserItemAdapter(val itemList: ArrayList<UserItemList>) :
     RecyclerView.Adapter<UserItemAdapter.UserViewHolder>() {
 
         inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val profile: ImageView = itemView.findViewById(R.id.userImageView)
-            val mateName: TextView = itemView.findViewById(R.id.mateName)
-            val smoke: TextView = itemView.findViewById(R.id.smoke)
+            val nickname: TextView = itemView.findViewById(R.id.mateName)
+            val profileImageUrl: ImageView = itemView.findViewById(R.id.userImageView)
+            val studentId: TextView = itemView.findViewById(R.id.entrance_year)
+            val birthYear: TextView = itemView.findViewById(R.id.age)
             val mbti: TextView = itemView.findViewById(R.id.mbti)
-
+            val desire: TextView = itemView.findViewById(R.id.desired)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -30,9 +31,11 @@ class UserItemAdapter(val itemList: ArrayList<UserItemList>) :
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val item = itemList[position]
-        holder.profile.setImageResource(item.profileLocal)
-        holder.mateName.text = item.mateNickName
-        holder.smoke.text = item.smoke
+        holder.nickname.text = item.mateNickName
+        holder.profileImageUrl.setImageResource(item.profileImageUrl)
+        holder.studentId.text = item.studentId.toString()
+        holder.birthYear.text = item.birthYear.toString()
         holder.mbti.text = item.mbti
+        holder.desire.text = item.desire
     }
 }
