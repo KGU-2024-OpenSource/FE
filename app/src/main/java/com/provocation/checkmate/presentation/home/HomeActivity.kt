@@ -15,8 +15,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var btn_Chatbar : View
     private lateinit var btn_IUbar : View
     private lateinit var btn_Homebar : View
-
-
+    private lateinit var btn_update : MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +24,17 @@ class HomeActivity : AppCompatActivity() {
         initViews()
         setupListener()
 
+    }
+
+    private fun initViews() {
+        btn_Chatbar = findViewById(R.id.btn_section_chat)
+        btn_Homebar = findViewById(R.id.btn_section_home)
+        btn_IUbar = findViewById(R.id.btn_section_I_U)
+        btn_update = findViewById(R.id.btn_update)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun setupListener() {
@@ -39,21 +49,11 @@ class HomeActivity : AppCompatActivity() {
             showToast("Chat 전환")
         }
 
+        btn_update.setOnClickListener {
+            val intent = Intent(this, IAmYouAreActivity::class.java)
+            startActivity(intent)
+        }
+
     }
-
-    private fun initViews() {
-        btn_Chatbar = findViewById(R.id.btn_section_chat)
-        btn_Homebar = findViewById(R.id.btn_section_home)
-        btn_IUbar = findViewById(R.id.btn_section_I_U)
-
-        Log.d("HomeActivity", "btn_Chatbar: $btn_Chatbar")
-        Log.d("HomeActivity", "btn_Homebar: $btn_Homebar")
-        Log.d("HomeActivity", "btn_IUbar: $btn_IUbar")
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
 
 }
