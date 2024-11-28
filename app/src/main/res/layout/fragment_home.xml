@@ -5,52 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-
-        android:id="@+id/imageView7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/button" />
-
-    <View
-        android:id="@+id/btn_section_home"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.997" />
-
-    <View
-        android:id="@+id/btn_section_chat"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <View
-        android:id="@+id/btn_section_I_U"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/shapeableImageView"
         android:layout_width="100dp"
@@ -70,10 +24,11 @@
         android:id="@+id/btnHomeToMDI"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+         />
 
     <TextView
         android:id="@+id/myNickname"

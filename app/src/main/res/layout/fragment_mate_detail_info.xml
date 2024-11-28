@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    >
 
     <LinearLayout
         android:id="@+id/mate_detail_info_top"
@@ -331,57 +332,13 @@
         android:id="@+id/start_chatting"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/gray_rounded_button"
         android:text="대화하러 가기"
         android:textColor="@color/black"
-        android:background="@drawable/gray_rounded_button"
-        app:layout_constraintBottom_toTopOf="@id/imageView7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-    
-    <ImageView
-
-        android:id="@+id/imageView7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/button" />
-
-    <View
-        android:id="@+id/btn_section_home"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:background="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.997" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <View
-        android:id="@+id/btn_section_chat"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <View
-        android:id="@+id/btn_section_I_U"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

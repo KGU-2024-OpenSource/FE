@@ -9,8 +9,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.provocation.checkmate.FragmentManageActivity
 import com.provocation.checkmate.R
-import com.provocation.checkmate.presentation.home.HomeActivity
 import com.provocation.checkmate.presentation.login.service.AuthLoginService
 import com.provocation.checkmate.presentation.signup.SignupActivity
 
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
             onSuccess = {
                 runOnUiThread {
                     showToast("로그인 성공")
-                    startActivity(Intent(this, HomeActivity::class.java))
+                    startActivity(Intent(this, FragmentManageActivity::class.java))
                     finish()
                 }
             },
