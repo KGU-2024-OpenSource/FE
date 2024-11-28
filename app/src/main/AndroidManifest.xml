@@ -27,23 +27,32 @@
         <activity android:name=".presentation.signup.SignupActivity"
             android:exported="true"
             android:theme="@style/Theme.Checkmate"/>
-        <activity android:name=".presentation.home.HomeActivity"
+        <activity android:name=".presentation.home.HomeFragment"
             android:exported="true"
             android:theme="@style/Theme.Checkmate">
 
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".IAmYouAreActivity"
             android:exported="true"
             android:theme="@style/Theme.Checkmate"/>
         <activity
-            android:name=".MateDetailInfoActivity"
+            android:name=".MateDetailInfoFragment"
             android:exported="true"
             android:theme="@style/Theme.Checkmate"/>
+
+        <activity android:name=".FragmentManageActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Checkmate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
