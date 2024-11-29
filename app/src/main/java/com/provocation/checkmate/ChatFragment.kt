@@ -41,7 +41,7 @@ class ChatFragment : Fragment() {
             Chat("How are you?", myId, "2024-11-28 10:01:00"),
             Chat("I'm fine, thank you.", mateId),
             Chat("What about you?", mateId),
-        )
+        ) // 해당 부분을 추후 연동하여 가져와야합니다.
 
         chatView = view.findViewById(R.id.chat_view)
         chatView.layoutManager = LinearLayoutManager(requireContext())
