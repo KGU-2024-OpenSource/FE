@@ -7,7 +7,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 object EmailService {
-    private const val API_URL = "http://192.168.56.1:7070/auth/verification-code"
+    private const val API_URL = "http://192.168.56.1:8080/auth/verification-code"
     private val client = OkHttpClient()
 
     fun sendVerificationEmail(

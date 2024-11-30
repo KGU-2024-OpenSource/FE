@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.provocation.checkmate.IAmYouAreActivity
 import com.provocation.checkmate.MateDetailInfoFragment
 import com.provocation.checkmate.R
+import com.provocation.checkmate.presentation.home.service.UserListService
+import okhttp3.OkHttpClient
+
 class HomeFragment : Fragment() {
 
     private lateinit var btnUpdate: MaterialButton
@@ -32,30 +36,37 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         loadData()
         return view
-
-
     }
 
     private fun setupRecyclerView() {
+        recyclerView.addItemDecoration(CustomItemDecoration(1))
         adapter = UserItemAdapter(itemList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
-
-        adapter.notifyDataSetChanged()
     }
 
     private fun loadData() {
-        itemList.add(UserItemList("민빛별",R.drawable.computer_kgu, 2023, 1999, "#ESFJ", "비즈니스"))
-        itemList.add(UserItemList("김은별",R.drawable.computer_kgu, 2024, 1998, "#ISFJ", "비즈니스"))
-        itemList.add(UserItemList("박빛상",R.drawable.computer_kgu, 2025, 1997, "#ENFP", "비즈니스"))
-        itemList.add(UserItemList("민빛별",R.drawable.computer_kgu, 2023, 1999, "#ESFJ", "비즈니스"))
-        itemList.add(UserItemList("김은별",R.drawable.computer_kgu, 2024, 1998, "#ISFJ", "비즈니스"))
-        itemList.add(UserItemList("박빛상",R.drawable.computer_kgu, 2025, 1997, "#ENFP", "비즈니스"))
-        itemList.add(UserItemList("민빛별",R.drawable.computer_kgu, 2023, 1999, "#ESFJ", "비즈니스"))
-        itemList.add(UserItemList("김은별",R.drawable.computer_kgu, 2024, 1998, "#ISFJ", "비즈니스"))
-        itemList.add(UserItemList("박빛상",R.drawable.computer_kgu, 2025, 1997, "#ENFP", "비즈니스"))
-
+        UserListService.fetchUserList(
+            context = requireContext(),
+            onSuccess = { userList ->
+                if (isAdded && view != null) {
+                    requireActivity().runOnUiThread {
+                        itemList.clear()
+                        itemList.addAll(userList)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+            },
+            onFailure = { errorMessage ->
+                if (isAdded && view != null) {
+                    requireActivity().runOnUiThread {
+                        showToast("데이터를 불러오지 못했습니다: $errorMessage")
+                    }
+                }
+            }
+        )
     }
+
 
     private fun initView(view: View) {
         btnUpdate = view.findViewById(R.id.btn_update)

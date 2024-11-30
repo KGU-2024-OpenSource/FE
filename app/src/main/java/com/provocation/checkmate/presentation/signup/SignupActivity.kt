@@ -174,6 +174,7 @@ class SignupActivity : AppCompatActivity() {
 
         btnSignup.isEnabled = isAllValid
         btnSignup.setBackgroundColor(if (isAllValid) Color.parseColor("#000000") else Color.parseColor("#D3D3D3"))
+        btnSignup.setTextColor(if (isAllValid) Color.parseColor("#FFFFFF") else Color.parseColor("#000000"))
     }
 
     private fun sendEmailVerification(email: String) {

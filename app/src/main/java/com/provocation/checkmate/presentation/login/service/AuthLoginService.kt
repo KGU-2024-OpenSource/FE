@@ -10,7 +10,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 object AuthLoginService {
-    private const val API_URL = "http://192.168.56.1:7070/auth/login"
+    private const val API_URL = "http://192.168.56.1:8080/auth/login"
     private val client = OkHttpClient()
 
     fun sendLoginInformation(
@@ -39,6 +39,7 @@ object AuthLoginService {
                     val jwt = response.header("authorization")?.removePrefix("Bearer")
                     if (jwt != null) {
                         PreferenceManager.saveJwtToken (context, email, jwt)
+                        PreferenceManager.saveUserEmail(context, email)
                         onSuccess()
                     } else {
                         onFailure("비밀번호가 틀렸거나, 해당 계정이 존재하지 않습니다.")

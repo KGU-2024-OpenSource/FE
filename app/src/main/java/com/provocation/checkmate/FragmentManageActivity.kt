@@ -14,6 +14,11 @@ class FragmentManageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_manage)
 
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment()) // fragment_container는 레이아웃의 프래그먼트 컨테이너 ID
+                .commit()
+        }
         // 툴바 설정 (공통 기능)
         val toolbar = findViewById<ConstraintLayout>(R.id.main_toolbar)
 

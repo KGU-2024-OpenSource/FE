@@ -3,7 +3,7 @@ package com.provocation.checkmate.presentation.home
 data class UserItemList(
     //var profile: String? = null,
     var mateNickName: String? = null,
-    val profileImageUrl: Int,
+    var profileImageUrl: String? = null, // URL로 변경
     val studentId: Int,
     val birthYear: Int,
     var mbti: String? = null,
