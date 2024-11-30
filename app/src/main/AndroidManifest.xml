@@ -17,16 +17,16 @@
         <activity android:name=".FragmentManageActivity"
             android:exported="true"
             android:theme="@style/Theme.Checkmate">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
 
         <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Checkmate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".presentation.signup.SignupActivity"
@@ -47,8 +47,6 @@
             android:name=".MateDetailInfoFragment"
             android:exported="true"
             android:theme="@style/Theme.Checkmate"/>
-
->>>>>>> origin/develop
     </application>
 
 </manifest>
