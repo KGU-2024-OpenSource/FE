@@ -47,6 +47,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.play.services.maps)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.fragment)
+    implementation(libs.filament.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,4 +60,5 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     kapt("com.github.bumptech.glide:compiler:4.15.1")
+
 }

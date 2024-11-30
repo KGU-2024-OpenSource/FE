@@ -16,7 +16,17 @@ object PreferenceManager {
         editor.apply()
     }
 
-    fun getJwtToken(context: Context, email: String): String? {
+    fun saveUserEmail(context: Context, email: String) {
+        val editor = getPreferences(context).edit()
+        editor.putString("USER_EMAIL", email)
+        editor.apply()
+    }
+
+    fun getUserEmail(context: Context): String? {
+        return getPreferences(context).getString("USER_EMAIL", null)
+    }
+
+    fun getJwtToken(context: Context, email: String?): String? {
         val key = getJwtKey(email)
         return getPreferences(context).getString(key, null)
     }
@@ -28,7 +38,7 @@ object PreferenceManager {
         editor.apply()
     }
 
-    private fun getJwtKey(email: String): String {
+    private fun getJwtKey(email: String?): String {
         return "JWT_TOKEN_$email"
     }
 

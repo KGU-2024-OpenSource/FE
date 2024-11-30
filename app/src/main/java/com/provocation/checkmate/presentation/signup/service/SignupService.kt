@@ -12,7 +12,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 object SignupService {
-    private const val API_URL = "http://192.168.56.1:7070/auth/signup"
+    private const val API_URL = "http://192.168.56.1:8080/auth/signup"
     private val client = OkHttpClient()
 
     fun signup(

@@ -11,7 +11,7 @@ fun checkNickname(
     onFailure: (String) -> Unit
 ) {
     val client = OkHttpClient()
-    val url = "http://192.168.56.1:7070/auth/check-nickname?nickname=$nickname"
+    val url = "http://192.168.56.1:8080/auth/check-nickname?nickname=$nickname"
 
     val request = Request.Builder()
         .url(url)
