@@ -68,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
             onSuccess = {
                 runOnUiThread {
                     showToast("로그인 성공")
-
                     startActivity(Intent(this, FragmentManageActivity::class.java))
                     finish()
                 }

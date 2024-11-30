@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+<<<<<<< HEAD
+=======
+import android.widget.Button
+>>>>>>> origin/develop
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -23,6 +27,8 @@ class MateDetailInfoFragment : Fragment() {
     private lateinit var tvMbti: TextView
     private lateinit var tvHopeIntimacy: TextView
     private lateinit var tvMajor: TextView
+
+    private lateinit var btnStartChat: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,5 +78,13 @@ class MateDetailInfoFragment : Fragment() {
 
         tvMajor = view.findViewById(R.id.mate_major)
         tvMajor.text = "컴퓨터공학전공"
+
+        btnStartChat = view.findViewById(R.id.start_chatting)
+        btnStartChat.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ChatFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }

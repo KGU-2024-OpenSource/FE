@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -16,13 +15,13 @@ import com.provocation.checkmate.IAmYouAreActivity
 import com.provocation.checkmate.MateDetailInfoFragment
 import com.provocation.checkmate.R
 import com.provocation.checkmate.presentation.home.service.UserListService
-import okhttp3.OkHttpClient
 
 class HomeFragment : Fragment() {
 
     private lateinit var btnUpdate: MaterialButton
     private lateinit var adapter: UserItemAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var btnMDI: View // MateDetailInfoFragment 이동 버튼
     private val itemList = arrayListOf<UserItemList>()
 
     override fun onCreateView(
@@ -67,10 +66,10 @@ class HomeFragment : Fragment() {
         )
     }
 
-
     private fun initView(view: View) {
         btnUpdate = view.findViewById(R.id.btn_update)
         recyclerView = view.findViewById(R.id.user_list)
+        btnMDI = view.findViewById(R.id.btnHomeToMDI) // MateDetailInfoFragment 이동 버튼
     }
 
     private fun setupListeners() {
@@ -78,11 +77,17 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), IAmYouAreActivity::class.java)
             startActivity(intent)
         }
+
+        btnMDI.setOnClickListener {
+            // MateDetailInfoFragment로 이동
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, MateDetailInfoFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
-
-
 }
