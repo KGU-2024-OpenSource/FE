@@ -17,13 +17,19 @@ import com.provocation.checkmate.MateDetailInfoFragment
 import com.provocation.checkmate.R
 import com.provocation.checkmate.presentation.home.service.UserListService
 import android.content.Context
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.provocation.checkmate.config.Conf
 
 class HomeFragment : Fragment() {
 
-    private lateinit var btnUpdate: MaterialButton
+    private lateinit var profileImage: ImageView
+    private lateinit var profileName: TextView
+
     private lateinit var adapter: UserItemAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var btnMDI: View // MateDetailInfoFragment 이동 버튼
     private val itemList = arrayListOf<UserItemList>()
 
     override fun onCreateView(
@@ -42,12 +48,33 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
         recyclerView.addItemDecoration(CustomItemDecoration(1))
-        adapter = UserItemAdapter(itemList)
+        adapter = UserItemAdapter(this, itemList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
     }
 
     private fun loadData() {
+
+        IAmYouAreService.getMyInfo(
+            context = requireContext(),
+            onSuccess = { myInfoJson ->
+                if (isAdded && view != null) {
+                    requireActivity().runOnUiThread {
+
+                        Glide.with(requireContext())
+                            .load(
+                                myInfoJson.getString("profileImageUrl")
+                                    .replace("localhost", Conf.BASE_IP)
+                            )
+                            .transform(CircleCrop())
+                            .into(profileImage)
+
+                        profileName.text = myInfoJson.getString("nickname")
+                    }
+                }},
+            onFailure = { errorMessage -> }
+        )
+
         UserListService.fetchUserList(
             context = requireContext(),
             onSuccess = { userList ->
@@ -70,13 +97,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView(view: View) {
-        btnUpdate = view.findViewById(R.id.btn_update)
+        profileImage = view.findViewById(R.id.myImage)
+        profileName = view.findViewById(R.id.myNickname)
         recyclerView = view.findViewById(R.id.user_list)
-        btnMDI = view.findViewById(R.id.btnHomeToMDI) // MateDetailInfoFragment 이동 버튼
     }
 
     private fun setupListeners() {
-        btnUpdate.setOnClickListener {
+        /*btnUpdate.setOnClickListener {
             val intent = Intent(requireContext(), IAmYouAreActivity::class.java)
             startActivity(intent)
         }
@@ -87,7 +114,7 @@ class HomeFragment : Fragment() {
                 .replace(R.id.fragment_container, MateDetailInfoFragment())
                 .addToBackStack(null)
                 .commit()
-        }
+        }*/
     }
 
     private fun showToast(message: String) {
