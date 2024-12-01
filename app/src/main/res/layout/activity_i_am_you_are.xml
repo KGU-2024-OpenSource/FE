@@ -305,7 +305,7 @@
                     android:id="@+id/youare_sleep_sensor_toggle_dark"
                     style="@style/IAmYouAre_ToggleButtonStyle"
                     android:textOff="어두움"
-                    android:textOn="어둠" />
+                    android:textOn="어두움" />
 
                 <ToggleButton
                     android:id="@+id/youare_sleep_sensor_toggle_dont_know"

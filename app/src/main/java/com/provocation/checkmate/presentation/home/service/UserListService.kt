@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.activity.result.PickVisualMediaRequest
 import com.provocation.checkmate.R
+import com.provocation.checkmate.config.Conf
 import com.provocation.checkmate.presentation.home.UserItemList
 import com.provocation.checkmate.presentation.login.service.PreferenceManager
 import okhttp3.Call
@@ -16,7 +17,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 object UserListService {
-    private const val API_URL = "http://192.168.56.1:8080/info"
+    private const val API_URL = "http://${Conf.BASE_IP}:8080/info"
     private val client = OkHttpClient()
 
     fun fetchUserList(

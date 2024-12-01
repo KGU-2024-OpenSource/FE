@@ -2,6 +2,7 @@ package com.provocation.checkmate
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
@@ -9,9 +10,19 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import android.widget.ToggleButton
+import com.provocation.checkmate.model.IAmYouAreInfo
 import com.provocation.checkmate.presentation.home.HomeFragment
 
 class IAmYouAreActivity : AppCompatActivity() {
+
+    private val mbtiList = listOf(
+        "INFP", "INTP", "INFJ", "INTJ",
+        "ISFP", "ISTP", "ISFJ", "ISTJ",
+        "ENFP", "ENTP", "ENFJ", "ENTJ",
+        "ESFP", "ESTP", "ESFJ", "ESTJ"
+    )
+    val studentIdList = (2016 ..2024).map { it.toString() }
+    val birthYearList = (1997..2006).map { it.toString() }
 
     private lateinit var spinnerIAmMbti: Spinner
     private lateinit var spinnerIAmYearOfAdmission: Spinner
@@ -53,6 +64,7 @@ class IAmYouAreActivity : AppCompatActivity() {
 
     private lateinit var buttonUpdate: Button
     private lateinit var buttonBack: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,40 +130,171 @@ class IAmYouAreActivity : AppCompatActivity() {
         buttonBack.setOnClickListener{
             onBackPressed();
         }
+
+        loadUserDate()
     }
 
     private fun setupSpinners() {
         // MBTI 데이터
-        val mbtiList = listOf("ENFJ", "ENTJ", "INFJ", "INTJ", "ENFP", "ENTP", "INFP", "INTP",
-            "ESFJ", "ESTJ", "ISFJ", "ISTJ", "ESFP", "ESTP", "ISFP", "ISTP")
         val mbtiAdapter = ArrayAdapter(this, R.layout.spinner_item, mbtiList)
         mbtiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerIAmMbti.adapter = mbtiAdapter
 
         // 학번 데이터
-        val studentIdList = (2016 ..2024).map { it.toString() }
         val studentIdAdapter = ArrayAdapter(this, R.layout.spinner_item, studentIdList)
         studentIdAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerIAmYearOfAdmission.adapter = studentIdAdapter
 
         // 출생년도 데이터
-        val birthYearList = (1997..2006).map { it.toString() }
         val birthYearAdapter = ArrayAdapter(this, R.layout.spinner_item, birthYearList)
         birthYearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerIAmYearOfBirth.adapter = birthYearAdapter
     }
     private fun saveUserData() {
-        val selectedMbti: String = spinnerIAmMbti.selectedItem.toString() // Spinner 선택 값
-        val isSmoker: Boolean = toggleIAmSmokeTobacco.isChecked or toggleIAmSmokeElectronic.isChecked
-        val major: String = editTextIAmMajor.text.toString()
+        var myMBTI: String = spinnerIAmMbti.selectedItem.toString()
+        var myStudentId: Long = spinnerIAmYearOfAdmission.selectedItem.toString().toLong()
+        var myBirthYear: Int = spinnerIAmYearOfBirth.selectedItem.toString().toInt()
 
-        // 확인 메시지
-        Toast.makeText(
-            this,
-            "MBTI: $selectedMbti" + "흡연여부: $isSmoker" + "학과: $major",
-            Toast.LENGTH_SHORT
-        ).show()
+        var mySmokingStatus: String = ""
+        if (toggleIAmSmokeNo.isChecked) {
+            mySmokingStatus = toggleIAmSmokeNo.textOn.toString()
+        } else if (toggleIAmSmokeTobacco.isChecked) {
+            mySmokingStatus = toggleIAmSmokeTobacco.textOn.toString()
+        } else if (toggleIAmSmokeElectronic.isChecked) {
+            mySmokingStatus = toggleIAmSmokeElectronic.textOn.toString()
+        }
+
+        var mySnoringStatus: String = ""
+        if (toggleIAmSnoringNo.isChecked) {
+            mySnoringStatus = toggleIAmSnoringNo.textOn.toString()
+        } else if (toggleIAmSnoringYes.isChecked) {
+            mySnoringStatus = toggleIAmSnoringYes.textOn.toString()
+        } else if (toggleIAmSnoringLittle.isChecked) {
+            mySnoringStatus = toggleIAmSnoringLittle.textOn.toString()
+        }
+
+        var mySleepSensitivity: String = ""
+        if (toggleIAmSleepSenseLight.isChecked) {
+            mySleepSensitivity = toggleIAmSleepSenseLight.textOn.toString()
+        } else if (toggleIAmSleepSenseDark.isChecked) {
+            mySleepSensitivity = toggleIAmSleepSenseDark.textOn.toString()
+        } else if (toggleIAmSleepSenseDontKnow.isChecked) {
+            mySleepSensitivity = toggleIAmSleepSenseDontKnow.textOn.toString()
+        }
+
+        var myDepartment: String = editTextIAmMajor.text.toString()
+
+        var myDesiredCloseness: String = ""
+        if (toggleIAmHopeIntimacyBusiness.isChecked) {
+            myDesiredCloseness = toggleIAmHopeIntimacyBusiness.textOn.toString()
+        } else if (toggleIAmHopeIntimacyFriend.isChecked) {
+            myDesiredCloseness = toggleIAmHopeIntimacyFriend.textOn.toString()
+        } else if (toggleIAmHopeIntimacyBestFriend.isChecked) {
+            myDesiredCloseness = toggleIAmHopeIntimacyBestFriend.textOn.toString()
+        }
+
+        var yourSmokingStatus: String = ""
+        if (toggleYouAreSmokeNo.isChecked) {
+            yourSmokingStatus = toggleYouAreSmokeNo.textOn.toString()
+        } else if (toggleYouAreSmokeTobacco.isChecked) {
+            yourSmokingStatus = toggleYouAreSmokeTobacco.textOn.toString()
+        } else if (toggleYouAreSmokeElectronic.isChecked) {
+            yourSmokingStatus = toggleYouAreSmokeElectronic.textOn.toString()
+        }
+
+        var yourSnoringStatus: String = ""
+        if (toggleYouAreSnoringNo.isChecked) {
+            yourSnoringStatus = toggleYouAreSnoringNo.textOn.toString()
+        } else if (toggleYouAreSnoringYes.isChecked) {
+            yourSnoringStatus = toggleYouAreSnoringYes.textOn.toString()
+        } else if (toggleYouAreSnoringLittle.isChecked) {
+            yourSnoringStatus = toggleYouAreSnoringLittle.textOn.toString()
+        }
+
+        var yourSleepSensitivity: String = ""
+        if (toggleYouAreSleepSensorLight.isChecked) {
+            yourSleepSensitivity = toggleYouAreSleepSensorLight.textOn.toString()
+        } else if (toggleYouAreSleepSensorDark.isChecked) {
+            yourSleepSensitivity = toggleYouAreSleepSensorDark.textOn.toString()
+        } else if (toggleYouAreSleepSensorDontKnow.isChecked) {
+            yourSleepSensitivity = toggleYouAreSleepSensorDontKnow.textOn.toString()
+        }
+
+        var yourDepartment: String = ""
+        if (toggleYouAreMajorSame.isChecked) {
+            yourDepartment = toggleYouAreMajorSame.textOn.toString()
+        } else if (toggleYouAreMajorDiffer.isChecked) {
+            yourDepartment = toggleYouAreMajorDiffer.textOn.toString()
+        } else if (toggleYouAreMajorNoMatter.isChecked) {
+            yourDepartment = toggleYouAreMajorNoMatter.textOn.toString()
+        }
+
+        IAmYouAreService.sendIamYouAreInfo(
+            myMBTI, myStudentId, myBirthYear,
+            mySmokingStatus, mySnoringStatus, mySleepSensitivity,
+            myDepartment, myDesiredCloseness,
+            yourSmokingStatus, yourSnoringStatus, yourSleepSensitivity,
+            yourDepartment,
+            context = applicationContext,
+            onSuccess = { runOnUiThread{} },
+            onFailure = { errorMessage -> runOnUiThread{ Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()} }
+        )
     }
+    private fun loadUserDate() {
+        IAmYouAreService.getIamYouAreInfo(applicationContext,
+            onSuccess = {
+                info -> runOnUiThread{
+                    changeUserData(info)
+                }
+            }, onFailure = {
+                runOnUiThread {
+                    Toast.makeText(this, "나는 너는 정보가 아직 없습니다.\n등록해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+    private fun changeUserData(info: IAmYouAreInfo) {
+        spinnerIAmMbti.post {
+            spinnerIAmMbti.setSelection(mbtiList.indexOf(info.myMBTI))
+        }
+        spinnerIAmYearOfAdmission.post {
+            spinnerIAmYearOfAdmission.setSelection(studentIdList.indexOf(info.myStudentId.toString()))
+        }
+        spinnerIAmYearOfBirth.post {
+            spinnerIAmYearOfBirth.setSelection(birthYearList.indexOf(info.myBirthYear.toString()))
+        }
 
+        toggleIAmSmokeNo.isChecked = (info.mySmokingStatus.equals(toggleIAmSmokeNo.textOn))
+        toggleIAmSmokeTobacco.isChecked = (info.mySmokingStatus.equals(toggleIAmSmokeTobacco.textOn))
+        toggleIAmSmokeElectronic.isChecked = (info.mySmokingStatus.equals(toggleIAmSmokeElectronic.textOn))
 
+        toggleIAmSnoringNo.isChecked = (info.mySnoringStatus.equals(toggleIAmSnoringNo.textOn))
+        toggleIAmSnoringYes.isChecked = (info.mySnoringStatus.equals(toggleIAmSnoringYes.textOn))
+        toggleIAmSnoringLittle.isChecked = (info.mySnoringStatus.equals(toggleIAmSnoringLittle.textOn))
+
+        toggleIAmSleepSenseLight.isChecked = (info.mySleepSensitivity.equals(toggleIAmSleepSenseLight.textOn))
+        toggleIAmSleepSenseDark.isChecked = (info.mySleepSensitivity.equals(toggleIAmSleepSenseDark.textOn))
+        toggleIAmSleepSenseDontKnow.isChecked = (info.mySleepSensitivity.equals(toggleIAmSleepSenseDontKnow.textOn))
+
+        editTextIAmMajor.setText(info.myDepartment)
+
+        toggleIAmHopeIntimacyBusiness.isChecked = (info.myDesiredCloseness.equals(toggleIAmHopeIntimacyBusiness.textOn))
+        toggleIAmHopeIntimacyFriend.isChecked = (info.myDesiredCloseness.equals(toggleIAmHopeIntimacyFriend.textOn))
+        toggleIAmHopeIntimacyBestFriend.isChecked = (info.myDesiredCloseness.equals(toggleIAmHopeIntimacyBestFriend.textOn))
+
+        toggleYouAreSmokeNo.isChecked = (info.yourSmokingStatus.equals(toggleYouAreSmokeNo.textOn))
+        toggleYouAreSmokeTobacco.isChecked = (info.yourSmokingStatus.equals(toggleYouAreSmokeTobacco.textOn))
+        toggleYouAreSmokeElectronic.isChecked = (info.yourSmokingStatus.equals(toggleYouAreSmokeElectronic.textOn))
+
+        toggleYouAreSnoringNo.isChecked = (info.yourSnoringStatus.equals(toggleYouAreSnoringNo.textOn))
+        toggleYouAreSnoringYes.isChecked = (info.yourSnoringStatus.equals(toggleYouAreSnoringYes.textOn))
+        toggleYouAreSnoringLittle.isChecked = (info.yourSnoringStatus.equals(toggleYouAreSnoringLittle.textOn))
+
+        toggleYouAreSleepSensorLight.isChecked = (info.yourSleepSensitivity.equals(toggleYouAreSleepSensorLight.textOn))
+        toggleYouAreSleepSensorDark.isChecked = (info.yourSleepSensitivity.equals(toggleYouAreSleepSensorDark.textOn))
+        toggleYouAreSleepSensorDontKnow.isChecked = (info.yourSleepSensitivity.equals(toggleYouAreSleepSensorDontKnow.textOn))
+
+        toggleYouAreMajorSame.isChecked = (info.yourDepartment.equals(toggleYouAreMajorSame.textOn))
+        toggleYouAreMajorDiffer.isChecked = (info.yourDepartment.equals(toggleYouAreMajorDiffer.textOn))
+        toggleYouAreMajorNoMatter.isChecked = (info.yourDepartment.equals(toggleYouAreMajorNoMatter.textOn))
+    }
 }
