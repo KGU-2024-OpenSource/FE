@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun sendLoginInformation(email: String, password: String) {
         AuthLoginService.sendLoginInformation(
-            this,
+            applicationContext,
             email,
             password,
             onSuccess = {

@@ -1,6 +1,8 @@
 package com.provocation.checkmate.presentation.login.service
 
 import android.content.Context
+import android.util.Log
+import com.provocation.checkmate.config.Conf
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
@@ -10,7 +12,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 object AuthLoginService {
-    private const val API_URL = "http://192.168.56.1:8080/auth/login"
+    private const val API_URL = "http://${Conf.BASE_IP}:8080/auth/login"
     private val client = OkHttpClient()
 
     fun sendLoginInformation(
@@ -36,7 +38,8 @@ object AuthLoginService {
             }
             override fun onResponse(call: Call, response: okhttp3.Response) {
                 if(response.isSuccessful) {
-                    val jwt = response.header("authorization")?.removePrefix("Bearer")
+                    val jwt = response.header("authorization")?.removePrefix("Bearer ")
+                    Log.e("JWT", jwt.toString())
                     if (jwt != null) {
                         PreferenceManager.saveJwtToken (context, email, jwt)
                         PreferenceManager.saveUserEmail(context, email)

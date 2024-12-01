@@ -1,6 +1,7 @@
 package com.provocation.checkmate.presentation.signup.service
 
 import android.util.Log
+import com.provocation.checkmate.config.Conf
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -12,7 +13,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 object SignupService {
-    private const val API_URL = "http://192.168.56.1:8080/auth/signup"
+    private const val API_URL = "http://${Conf.BASE_IP}:8080/auth/signup"
     private val client = OkHttpClient()
 
     fun signup(

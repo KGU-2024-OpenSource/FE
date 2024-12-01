@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.provocation.checkmate.IAmYouAreActivity
+import com.provocation.checkmate.IAmYouAreService
 import com.provocation.checkmate.MateDetailInfoFragment
 import com.provocation.checkmate.R
 import com.provocation.checkmate.presentation.home.service.UserListService
+import android.content.Context
 
 class HomeFragment : Fragment() {
 
@@ -34,6 +36,7 @@ class HomeFragment : Fragment() {
         setupListeners()
         setupRecyclerView()
         loadData()
+
         return view
     }
 

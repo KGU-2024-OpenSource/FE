@@ -1,5 +1,6 @@
 package com.provocation.checkmate.presentation.signup.service
 
+import com.provocation.checkmate.config.Conf
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -11,7 +12,7 @@ fun checkNickname(
     onFailure: (String) -> Unit
 ) {
     val client = OkHttpClient()
-    val url = "http://192.168.56.1:8080/auth/check-nickname?nickname=$nickname"
+    val url = "http://${Conf.BASE_IP}:8080/auth/check-nickname?nickname=$nickname"
 
     val request = Request.Builder()
         .url(url)
