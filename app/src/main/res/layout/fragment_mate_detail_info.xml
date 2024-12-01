@@ -34,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="name"
             android:textSize="20dp"
             android:textColor="@color/black"
             />
@@ -94,7 +93,6 @@
                         android:id="@+id/mate_birth_year"
                         android:layout_width="110dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="2001"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_birth_year"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_birth_year"
                         />
@@ -119,7 +117,6 @@
                         android:id="@+id/mate_admission_year"
                         android:layout_width="110dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="20"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_admission_year"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_admission_year"
                         />
@@ -144,7 +141,6 @@
                         android:id="@+id/mate_gender"
                         android:layout_width="110dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="여성"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_gender"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_gender"
                         />
@@ -175,7 +171,6 @@
                         android:id="@+id/mate_smoke"
                         android:layout_width="110dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="노담"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_smoke"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_smoke"
                         />
@@ -200,7 +195,6 @@
                         android:id="@+id/mate_snoring"
                         android:layout_width="110dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="피곤하면\n가끔"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_snoring"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_snoring"
                         />
@@ -225,7 +219,6 @@
                         android:id="@+id/mate_sleep_sensor"
                         android:layout_width="110dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="어두움"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_sleep_sensor"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_sleep_sensor"
                         />
@@ -258,7 +251,6 @@
                         android:id="@+id/mate_mbti"
                         android:layout_width="180dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="ISTP"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_mbti"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_mbti"
                         />
@@ -283,7 +275,6 @@
                         android:id="@+id/mate_hope_intimacy"
                         android:layout_width="180dp"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="비즈니스"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_hope_intimacy"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_hope_intimacy"
                         />
@@ -315,7 +306,6 @@
                         android:id="@+id/mate_major"
                         android:layout_width="match_parent"
                         style="@style/MateDetailInfo_TextViewStyle"
-                        android:text="컴퓨터공학전공"
                         app:layout_constraintTop_toBottomOf="@id/literal_mate_Major"
                         app:layout_constraintStart_toStartOf="@id/literal_mate_Major"
                         />

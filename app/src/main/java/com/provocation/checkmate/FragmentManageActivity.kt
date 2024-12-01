@@ -52,4 +52,5 @@ class FragmentManageActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
+
 }

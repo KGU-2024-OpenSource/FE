@@ -74,11 +74,13 @@ object UserListService {
             val jsonObject = resultsArray.getJSONObject(i)
             userList.add(
                 UserItemList(
+                    mateId = jsonObject.getLong("myInfoId"),
                     mateNickName = jsonObject.getString("nickname"),
-                    profileImageUrl = jsonObject.getString("profileImageUrl"),
+                    profileImageUrl = jsonObject.getString("profileImageUrl").replace("localhost", Conf.BASE_IP),
+                    mbti = jsonObject.getString("mbti"),
                     studentId = jsonObject.getInt("studentId"),
                     birthYear = jsonObject.getInt("birthYear"),
-                    mbti = jsonObject.getString("mbti"),
+                    department = jsonObject.getString("department"),
                     desire = jsonObject.getString("desiredCloseness")
                 )
             )
