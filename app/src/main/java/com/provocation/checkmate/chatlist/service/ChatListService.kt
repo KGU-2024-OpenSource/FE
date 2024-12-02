@@ -79,7 +79,7 @@ object ChatListService {
                 val roomObject = resultsInnerArray.getJSONObject(i)
                 chatList.add(
                     ChatItemList(
-                        roomId = roomObject.getInt("id"),
+                        roomId = roomObject.getInt("roomId"),
                         receiverName = roomObject.getString("receiverName"),
                         lastMessage = roomObject.getString("lastMessage")
                     )
