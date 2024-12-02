@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.provocation.checkmate.chatlist.ChatListFragment
-import com.provocation.checkmate.presentation.home.HomeFragment
+import com.provocation.checkmate.home.HomeFragment
 
 class FragmentManageActivity : AppCompatActivity() {
 

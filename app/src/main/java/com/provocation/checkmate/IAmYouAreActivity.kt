@@ -11,7 +11,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import android.widget.ToggleButton
 import com.provocation.checkmate.model.IAmYouAreInfo
-import com.provocation.checkmate.presentation.home.HomeFragment
+import com.provocation.checkmate.home.HomeFragment
 
 class IAmYouAreActivity : AppCompatActivity() {
 
@@ -236,7 +236,9 @@ class IAmYouAreActivity : AppCompatActivity() {
             yourSmokingStatus, yourSnoringStatus, yourSleepSensitivity,
             yourDepartment,
             context = applicationContext,
-            onSuccess = { runOnUiThread{} },
+            onSuccess = { runOnUiThread{}
+                Toast.makeText(this, "업데이트 되었습니다.", Toast.LENGTH_SHORT).show()
+            },
             onFailure = { errorMessage -> runOnUiThread{ Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()} }
         )
     }

@@ -1,4 +1,4 @@
-package com.provocation.checkmate.presentation.home
+package com.provocation.checkmate.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.provocation.checkmate.presentation.home.service
+package com.provocation.checkmate.home.service
 
 import okhttp3.OkHttpClient
 import android.content.Context
@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.activity.result.PickVisualMediaRequest
 import com.provocation.checkmate.R
 import com.provocation.checkmate.config.Conf
-import com.provocation.checkmate.presentation.home.UserItemList
+import com.provocation.checkmate.home.UserItemList
 import com.provocation.checkmate.presentation.login.service.PreferenceManager
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
