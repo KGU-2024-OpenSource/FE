@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.provocation.checkmate.chatlist.ChatListFragment
 import com.provocation.checkmate.presentation.home.HomeFragment
 
 class FragmentManageActivity : AppCompatActivity() {
@@ -29,7 +30,7 @@ class FragmentManageActivity : AppCompatActivity() {
 
         toolbar.findViewById<View>(R.id.touch_zone_2).setOnClickListener {
             // 해당 버튼이 클릭되었을 때 처리
-            //replaceFragment(ChatListFragment())
+            replaceFragment(ChatListFragment())
         }
 
         toolbar.findViewById<View>(R.id.touch_zone_3).setOnClickListener {
