@@ -79,8 +79,10 @@ object ChatListService {
                 val roomObject = resultsInnerArray.getJSONObject(i)
                 chatList.add(
                     ChatItemList(
-                        roomId = roomObject.getInt("roomId"),
+                        roomId = roomObject.getLong("roomId"),
+                        senderId = roomObject.getLong("receiverId"),
                         receiverName = roomObject.getString("receiverName"),
+                        receiverProfileImageUrl = roomObject.getString("receiverProfileImageUrl").replace("localhost", Conf.BASE_IP),
                         lastMessage = roomObject.getString("lastMessage")
                     )
                 )

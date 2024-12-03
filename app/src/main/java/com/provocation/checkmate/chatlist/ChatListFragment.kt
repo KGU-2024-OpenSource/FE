@@ -50,7 +50,7 @@ class ChatListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         recyclerView.addItemDecoration(CustomItemDecoration(1))
-        adapter = ChatListAdapter(chatList)
+        adapter = ChatListAdapter(this, chatList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
     }

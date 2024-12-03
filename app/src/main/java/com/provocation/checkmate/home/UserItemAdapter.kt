@@ -58,7 +58,7 @@ class UserItemAdapter(
         holder.itemView.setOnClickListener {
             fragment.requireActivity().supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, MateDetailInfoFragment.newInstance(item.mateId))
+                .replace(R.id.fragment_container, MateDetailInfoFragment.newInstance(item.myInfoId, item.mateId))
                 .addToBackStack(null)
                 .commit()
         }

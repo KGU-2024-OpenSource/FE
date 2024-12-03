@@ -4,7 +4,7 @@
         <!-- 로컬 개발용 IP 주소 -->
         <!-- <domain includeSubdomains="true">192.168.45.178</domain> -->
 
-        <domain includeSubdomains="true">192.168.56.1</domain>
+        <domain includeSubdomains="true">192.168.55.178</domain>
 
     </domain-config>
     <base-config cleartextTrafficPermitted="false" />

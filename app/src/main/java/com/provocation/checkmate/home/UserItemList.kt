@@ -2,6 +2,7 @@ package com.provocation.checkmate.home
 
 data class UserItemList(
     //var profile: String? = null,
+    var myInfoId: Long,
     var mateId: Long,
     var mateNickName: String? = null,
     var profileImageUrl: String? = null, // URL로 변경
