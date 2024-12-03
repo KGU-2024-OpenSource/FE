@@ -16,6 +16,7 @@ import java.time.LocalDate
 
 class MateDetailInfoFragment : Fragment() {
 
+    private var myInfoId: Long = -1
     private var mateId: Long = -1
 
     private lateinit var imageProfile: ImageView
@@ -33,9 +34,10 @@ class MateDetailInfoFragment : Fragment() {
     private lateinit var btnStartChat: Button
 
     companion object {
-        fun newInstance(mateId: Long): MateDetailInfoFragment {
+        fun newInstance(myInfoId: Long, mateId: Long): MateDetailInfoFragment {
             val fragment = MateDetailInfoFragment()
             val args = Bundle()
+            args.putLong("myInfoId", myInfoId)
             args.putLong("mateId", mateId)
             fragment.arguments = args
             return fragment
@@ -48,19 +50,18 @@ class MateDetailInfoFragment : Fragment() {
     ): View? {
         // Fragment의 레이아웃을 Inflate
         return inflater.inflate(R.layout.fragment_mate_detail_info, container, false)
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
+            myInfoId = it.getLong("myInfoId")
             mateId = it.getLong("mateId")
         }
 
 
-        MateDetailInfoService.getMateDetailInfo(mateId,
+        MateDetailInfoService.getMateDetailInfo(myInfoId,
             requireContext().applicationContext,
             onSuccess = { json -> requireActivity().runOnUiThread{
                 // 이미지 로딩 (Glide 사용)
@@ -104,7 +105,7 @@ class MateDetailInfoFragment : Fragment() {
                 btnStartChat = view.findViewById(R.id.start_chatting)
                 btnStartChat.setOnClickListener {
                     requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, ChatFragment())
+                        .replace(R.id.fragment_container, ChatFragment.newInstance(mateId))
                         .addToBackStack(null)
                         .commit()
                 }

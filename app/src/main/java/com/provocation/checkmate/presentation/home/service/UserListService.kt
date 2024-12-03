@@ -74,7 +74,8 @@ object UserListService {
             val jsonObject = resultsArray.getJSONObject(i)
             userList.add(
                 UserItemList(
-                    mateId = jsonObject.getLong("myInfoId"),
+                    myInfoId = jsonObject.getLong("myInfoId"),
+                    mateId = jsonObject.getLong("roommateId"),
                     mateNickName = jsonObject.getString("nickname"),
                     profileImageUrl = jsonObject.getString("profileImageUrl").replace("localhost", Conf.BASE_IP),
                     mbti = jsonObject.getString("mbti"),

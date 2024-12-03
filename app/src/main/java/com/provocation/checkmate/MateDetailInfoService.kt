@@ -21,7 +21,7 @@ object MateDetailInfoService {
     private val client = OkHttpClient()
 
     fun getMateDetailInfo(
-        mateId: Long,
+        myInfoId: Long,
         context: Context,
         onSuccess: (JSONObject) -> Unit,
         onFailure: (String) -> Unit,
@@ -36,7 +36,7 @@ object MateDetailInfoService {
 
         val request = jwt?.let {
             Request.Builder()
-                .url("${API_URL}${mateId}")
+                .url("${API_URL}${myInfoId}")
                 .addHeader("Authorization", "Bearer $jwt")
                 .get()
                 .build()
@@ -73,80 +73,5 @@ object MateDetailInfoService {
                 }
             })
         }
-    }
-
-    fun getIamYouAreInfo(
-        context: Context,
-        onSuccess: (IAmYouAreInfo) -> Unit,
-        onFailure: (String) -> Unit,
-    ) {
-        val email = PreferenceManager.getUserEmail(context)
-        val jwt = PreferenceManager.getJwtToken(context, email)
-
-        if (jwt.isNullOrEmpty()) {
-            Log.e("JWT Error", "JWT 토큰이 없습니다.")
-        }
-
-        val request = jwt?.let {
-            Request.Builder()
-                .url("${API_URL}/my")
-                .addHeader("Authorization", "Bearer $jwt")
-                .get()
-                .build()
-        }
-
-        if (request != null) {
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    onFailure(e.message ?: "네트워크 오류")
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    response.use {
-                        if (response.isSuccessful) {
-                            val responseBody = response.body?.string()
-                            if (responseBody != null) {
-                                val jsonResponse = JSONObject(responseBody)
-                                val status = jsonResponse.getJSONObject("status")
-                                val statusCode = status.getInt("code")
-                                val message = status.getString("message")
-
-                                if (statusCode == 200) {
-                                    val info = parseIAmYouAreInfo(responseBody)
-                                    onSuccess(info)
-                                } else if (statusCode == 404) {
-                                    onFailure("등록된 정보가 없습니다.")
-                                } else {
-                                    onFailure("서버 오류: $statusCode - $message")
-                                }
-                            } else {
-                                onFailure("서버 응답 본문이 비어 있습니다.")
-                            }
-                        } else {
-                            onFailure("HTTP 오류 : ${response.code} - ${response.message}\")\n")
-                        }
-                    }
-                }
-            })
-        }
-    }
-    fun parseIAmYouAreInfo(jsonResponse: String) : IAmYouAreInfo {
-        val jsonObject = JSONObject(jsonResponse)
-        val results = jsonObject.getJSONArray("results").getJSONObject(0)
-
-        return IAmYouAreInfo(
-            results.getString("myMBTI"),
-            results.getLong("myStudentId"),
-            results.getInt("myBirthYear"),
-            results.getString("mySmokingStatus"),
-            results.getString("mySnoringStatus"),
-            results.getString("mySleepSensitivity"),
-            results.getString("myDepartment"),
-            results.getString("myDesiredCloseness"),
-            results.getString("yourSmokingStatus"),
-            results.getString("yourSnoringStatus"),
-            results.getString("yourSleepSensitivity"),
-            results.getString("yourDepartment"),
-        )
     }
 }
