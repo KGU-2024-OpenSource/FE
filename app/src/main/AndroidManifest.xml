@@ -33,7 +33,7 @@
             android:exported="true"
             android:theme="@style/Theme.Checkmate"/>
 
-        <activity android:name=".presentation.home.HomeFragment"
+        <activity android:name=".home.HomeFragment"
             android:exported="true"
             android:theme="@style/Theme.Checkmate">
         </activity>

@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.provocation.checkmate.R
 import com.provocation.checkmate.chatlist.service.ChatListService
-import com.provocation.checkmate.presentation.home.CustomItemDecoration
-import com.provocation.checkmate.presentation.home.UserItemAdapter
+import com.provocation.checkmate.home.CustomItemDecoration
+import com.provocation.checkmate.home.UserItemAdapter
 import org.w3c.dom.Text
 
 class ChatListFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.provocation.checkmate.presentation.home
+package com.provocation.checkmate.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.provocation.checkmate.IAmYouAreActivity
 import com.provocation.checkmate.IAmYouAreService
 import com.provocation.checkmate.MateDetailInfoFragment
 import com.provocation.checkmate.R
-import com.provocation.checkmate.presentation.home.service.UserListService
+import com.provocation.checkmate.home.service.UserListService
 import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView

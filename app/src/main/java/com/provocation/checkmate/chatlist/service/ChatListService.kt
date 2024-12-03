@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.provocation.checkmate.chatlist.ChatItemList
 import com.provocation.checkmate.config.Conf
-import com.provocation.checkmate.presentation.home.service.UserListService
+import com.provocation.checkmate.home.service.UserListService
 import com.provocation.checkmate.presentation.login.service.PreferenceManager
 import okhttp3.Call
 import okhttp3.Callback

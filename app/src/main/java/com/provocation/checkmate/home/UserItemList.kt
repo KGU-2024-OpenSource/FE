@@ -1,4 +1,4 @@
-package com.provocation.checkmate.presentation.home
+package com.provocation.checkmate.home
 
 data class UserItemList(
     //var profile: String? = null,
