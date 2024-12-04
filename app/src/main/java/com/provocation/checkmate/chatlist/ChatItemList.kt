@@ -7,6 +7,6 @@ data class ChatItemList(
     val senderId: Long,
     val receiverName: String,
     val receiverProfileImageUrl: String,
-    val lastMessage: String
+    val lastMessage: String?
 
 )

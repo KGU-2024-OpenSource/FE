@@ -36,7 +36,8 @@ class ChatListAdapter(
         Glide.with(holder.receiverProfileImageUrl.context)
             .load(chatRoom.receiverProfileImageUrl)
             .into(holder.receiverProfileImageUrl)
-        holder.lastMessage.text = chatRoom.lastMessage
+        holder.lastMessage.text = chatRoom.lastMessage ?: "[ 어서 대화를 시작해보세요! ]"
+
 
 
         holder.itemView.setOnClickListener {

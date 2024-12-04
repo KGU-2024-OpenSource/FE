@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFD9D9D9"
-    android:id="@+id/chat_main"
-    >
+    android:id="@+id/chat_main">
     <LinearLayout
         android:id="@+id/chat_top"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         >
 
         <android.widget.Button
-            android:id="@+id/btnBack"
+            android:id="@+id/btnChatBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_arrow_left"
@@ -27,11 +27,10 @@
 
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="user name"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
@@ -46,7 +45,7 @@
         app:layout_constraintEnd_toStartOf="parent"
         />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/message_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,19 +61,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message"
+            android:hint="메세지를 입력하세요"
             android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="#FFD9D9D9"
             android:textColorHighlight="#33000000"
-            android:background="@null"/>
+            android:background="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/btnSend"
+            />
 
-        <android.widget.Button
+        <ImageView
             android:id="@+id/btnSend"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ic_arrow_left"
-            android:gravity="center" />
-    </LinearLayout>
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_send"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

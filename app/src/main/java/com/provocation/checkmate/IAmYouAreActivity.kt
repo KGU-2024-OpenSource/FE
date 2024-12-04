@@ -128,7 +128,7 @@ class IAmYouAreActivity : AppCompatActivity() {
         // 뒤로가기 버튼 정의
         buttonBack = findViewById(R.id.btnBack)
         buttonBack.setOnClickListener{
-            onBackPressed();
+            onBackPressedDispatcher.onBackPressed();
         }
 
         loadUserDate()
@@ -236,10 +236,11 @@ class IAmYouAreActivity : AppCompatActivity() {
             yourSmokingStatus, yourSnoringStatus, yourSleepSensitivity,
             yourDepartment,
             context = applicationContext,
-            onSuccess = { runOnUiThread{}
-                Toast.makeText(this, "업데이트 되었습니다.", Toast.LENGTH_SHORT).show()
+            onSuccess = { runOnUiThread {
+                    Toast.makeText(this, "업데이트 되었습니다.", Toast.LENGTH_SHORT).show()
+                }
             },
-            onFailure = { errorMessage -> runOnUiThread{ Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()} }
+            onFailure = { errorMessage -> runOnUiThread{ Toast.makeText(this, "정보를 모두 기입해주세요.", Toast.LENGTH_SHORT).show()} }
         )
     }
     private fun loadUserDate() {
@@ -250,7 +251,7 @@ class IAmYouAreActivity : AppCompatActivity() {
                 }
             }, onFailure = {
                 runOnUiThread {
-                    Toast.makeText(this, "나는 너는 정보가 아직 없습니다.\n등록해주세요.", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "나는 너는 정보가 아직 없습니다.\n등록해주세요.", Toast.LENGTH_SHORT).show()
                 }
             })
     }

@@ -180,19 +180,22 @@ class SignupActivity : AppCompatActivity() {
     private fun sendEmailVerification(email: String) {
         EmailService.sendVerificationEmail(email,
             onSuccess = { runOnUiThread { showToast("인증코드 전송 완료") } },
-            onFailure = { errorMessage -> runOnUiThread { showToast("인증코드 전송 실패: $errorMessage") } })
+            onFailure = { errorMessage -> runOnUiThread { showToast("인증코드 전송이 실패했습니다") } })
+            //onFailure = { errorMessage -> runOnUiThread { showToast("인증코드 전송 실패: $errorMessage") } })
     }
 
     private fun authenticationVerifyCode(email: String, code: String) {
         AuthEmailService.sendVerificationCode(email, code,
             onSuccess = { runOnUiThread { btnVerifyCode.text = "인증 완료" } },
-            onFailure = { errorMessage -> runOnUiThread { showToast("인증 코드가 일치하지 않습니다: $errorMessage") } })
+            onFailure = { errorMessage -> runOnUiThread { showToast("인증 코드가 일치하지 않습니다") } })
+            //onFailure = { errorMessage -> runOnUiThread { showToast("인증 코드가 일치하지 않습니다: $errorMessage") } })
     }
 
     private fun duplicateCheckNickname(nickname: String) {
         checkNickname(nickname,
             onSuccess = { runOnUiThread { btnDuplicateCheck.text = "사용가능" } },
-            onFailure = { errorMessage -> runOnUiThread { showToast("닉네임 중복: $errorMessage") } })
+            onFailure = { errorMessage -> runOnUiThread { showToast("닉네임이 중복됩니다") } })
+            //onFailure = { errorMessage -> runOnUiThread { showToast("닉네임 중복: $errorMessage") } })
     }
 
     private fun performSignup() {
