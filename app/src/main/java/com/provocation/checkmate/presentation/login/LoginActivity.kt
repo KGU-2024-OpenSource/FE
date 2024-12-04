@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             },
             onFailure = { errorMessage -> runOnUiThread {
-                showToast("로그인 실패 : $errorMessage")
+                Toast.makeText(baseContext, "로그인 실패 : $errorMessage", Toast.LENGTH_SHORT).show()
                 }
             })
     }

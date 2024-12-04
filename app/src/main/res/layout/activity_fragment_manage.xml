@@ -78,7 +78,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="3dp"
         android:background="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/main_toolbar"
         app:layout_constraintTop_toTopOf="@+id/fragment_container"

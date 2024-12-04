@@ -83,7 +83,7 @@ object ChatListService {
                         senderId = roomObject.getLong("receiverId"),
                         receiverName = roomObject.getString("receiverName"),
                         receiverProfileImageUrl = roomObject.getString("receiverProfileImageUrl").replace("localhost", Conf.BASE_IP),
-                        lastMessage = roomObject.getString("lastMessage")
+                        lastMessage = if (roomObject.isNull("lastMessage")) null else roomObject.getString("lastMessage")
                     )
                 )
             }

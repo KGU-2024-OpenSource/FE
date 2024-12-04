@@ -74,6 +74,18 @@ class HomeFragment : Fragment() {
                 }},
             onFailure = { errorMessage -> }
         )
+        IAmYouAreService.getIamYouAreInfo(
+            context = requireContext(),
+            onSuccess = {
+                    info ->
+            },
+            onFailure = {
+                if (view != null) {
+                    requireActivity().runOnUiThread {
+                        Toast.makeText(requireContext(), "나는 너는 정보가 아직 없습니다.\n등록해주세요.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
 
         UserListService.fetchUserList(
             context = requireContext(),

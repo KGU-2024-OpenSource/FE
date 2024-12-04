@@ -229,4 +229,63 @@ object IAmYouAreService {
             })
         }
     }
+
+    fun getUserNickname(
+        userId: Long,
+        context: Context,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit,
+    ) {
+        val email = PreferenceManager.getUserEmail(context)
+        val jwt = PreferenceManager.getJwtToken(context, email)
+
+        if (jwt.isNullOrEmpty()) {
+            Log.e("JWT Error", "JWT 토큰이 없습니다.")
+        }
+
+        val request = jwt?.let {
+            Request.Builder()
+                .url("${API_URL}/member/nickname/${userId}")
+                .addHeader("Authorization", "Bearer $jwt")
+                .get()
+                .build()
+        }
+
+        if (request != null) {
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    onFailure(e.message ?: "네트워크 오류")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    response.use {
+                        if (response.isSuccessful) {
+                            val responseBody = response.body?.string()
+                            if (responseBody != null) {
+                                val jsonResponse = JSONObject(responseBody)
+                                val status = jsonResponse.getJSONObject("status")
+                                val statusCode = status.getInt("code")
+                                val message = status.getString("message")
+
+                                if (statusCode == 200) {
+                                    onSuccess(
+                                        jsonResponse.getJSONArray("results").getJSONObject(0)
+                                            .getString("nickname")
+                                    )
+                                } else if (statusCode == 404) {
+                                    onFailure("등록된 정보가 없습니다.")
+                                } else {
+                                    onFailure("서버 오류: $statusCode - $message")
+                                }
+                            } else {
+                                onFailure("서버 응답 본문이 비어 있습니다.")
+                            }
+                        } else {
+                            onFailure("HTTP 오류 : ${response.code} - ${response.message}\")\n")
+                        }
+                    }
+                }
+            })
+        }
+    }
 }

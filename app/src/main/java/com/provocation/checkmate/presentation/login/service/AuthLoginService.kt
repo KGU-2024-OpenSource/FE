@@ -37,17 +37,19 @@ object AuthLoginService {
                 onFailure(e.message ?: "네트워크 오류")
             }
             override fun onResponse(call: Call, response: okhttp3.Response) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     val jwt = response.header("authorization")?.removePrefix("Bearer ")
                     Log.e("JWT", jwt.toString())
                     if (jwt != null) {
-                        PreferenceManager.saveJwtToken (context, email, jwt)
+                        PreferenceManager.saveJwtToken(context, email, jwt)
                         PreferenceManager.saveUserEmail(context, email)
                         onSuccess()
                     } else {
                         onFailure("비밀번호가 틀렸거나, 해당 계정이 존재하지 않습니다.")
                     }
-                } else ("HTTP 오류 : ${response.code}")
+                } else {
+                    onFailure("비밀번호가 틀렸거나, 해당 계정이 존재하지 않습니다.")
+                }
             }
         })
     }
